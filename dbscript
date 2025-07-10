@@ -1,0 +1,26 @@
+DROP TABLE IF EXISTS posts;
+CREATE TABLE posts (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    author TEXT NOT NULL
+);
+INSERT INTO posts (title, author) VALUES
+('CTF 101: SQLi Basics', 'alice'),
+('Blind Injection Adventures', 'bob'),
+('Subquery Side-Channels', 'carol'),
+('Tips from the Dark Web', 'dave'),
+('Flasky Exploits', 'frank'),
+('Try UNION SELECT flag FROM flags -- works every time', 'trollface'),
+-- ukryty hint
+('Some secrets are best kept in the flags table...', 'ghost'),  -- id = 7
+('Tip: I heard that the flag can be in the "flag" column in the second record...', 'anonymous');  -- id = 8
+
+DROP TABLE IF EXISTS flags;
+CREATE TABLE flags (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    flag TEXT NOT NULL
+);
+
+INSERT INTO flags (flag) VALUES ('flag{th1s_iz_n0t_a_f1ag}');
+INSERT INTO flags (flag) VALUES ('flag{0rd3r_by_b1ind_sq1i}');
+INSERT INTO flags (flag) VALUES ('flag{th1s_iz_a1s0_n0t_a_f1ag}');
