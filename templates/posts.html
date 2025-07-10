@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <title>Lista postów</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 700px;
+            margin: 2rem auto;
+            background: #f9f9f9;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        form.sort-form {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        select {
+            padding: 0.4rem 0.6rem;
+            font-size: 1rem;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            margin-right: 0.5rem;
+        }
+        button {
+            padding: 0.4rem 1rem;
+            font-size: 1rem;
+            border-radius: 4px;
+            border: none;
+            background-color: #2a7ae2;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #1d5bbf;
+        }
+        .post {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+            transition: box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        .post:hover {
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+        .post-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 0 0 0.3rem 0;
+            color: #2a7ae2;
+        }
+        .post-author {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.6rem;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            color: #aaa;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+      CTF Hint:
+      Możesz manipulować parametrem "sort" w URL, 
+      by odkryć, co kryje się za listą postów.
+      Spróbuj różnych wartości, ale uważaj na filtry!
+      ZWRÓĆ UWAGĘ NA POSTY!!!!
+    -->
+    <h1>Lista postów</h1>
+
+    <form method="get" action="/" class="sort-form">
+        <select name="sort" aria-label="Sortuj posty">
+            <option value="id">Sortuj po ID</option>
+            <option value="title">Sortuj po tytule</option>
+            <option value="author">Sortuj po autorze</option>
+            <option value="(SELECT CASE WHEN substr((SELECT flag FROM flags),1,1)='f' THEN id ELSE author END)">
+                Secret sort #1
+            </option>
+            <option value="(SELECT CASE WHEN substr((SELECT flag FROM flags),2,1)='l' THEN id ELSE author END)">
+                Secret sort #2
+            </option>
+        </select>
+        <button type="submit">Sortuj</button>
+    </form>
+
+    {% for row in rows %}
+    <article class="post">
+        <div class="post-title">{{ row[1] }}</div>
+        <div class="post-author">Autor: {{ row[2] }}</div>
+        <div class="post-id" style="display:none;">ID: {{ row[0] }}</div>
+    </article>
+    {% endfor %}
+
+    <div class="footer">© 2025 CTF Challenge</div>
+</body>
+</html>
