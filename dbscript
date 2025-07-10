@@ -24,3 +24,18 @@ CREATE TABLE flags (
 INSERT INTO flags (flag) VALUES ('flag{th1s_iz_n0t_a_f1ag}');
 INSERT INTO flags (flag) VALUES ('flag{0rd3r_by_b1ind_sq1i}');
 INSERT INTO flags (flag) VALUES ('flag{th1s_iz_a1s0_n0t_a_f1ag}');
+
+DROP TABLE IF EXISTS users;
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user TEXT NOT NULL,
+    password TEXT NOT NULL,
+    role TEXT NOT NULL
+);
+
+INSERT INTO users (user, password, role) VALUES
+('alice', 'qwerty123', 'user'),
+('bob', 'qwertyuiop', "user"),
+('carol', '1234567890', "user"),
+('dave', 'MyVeryStrongPassword', "admin"),
+('frank', 'asdfghjkl', "user");
